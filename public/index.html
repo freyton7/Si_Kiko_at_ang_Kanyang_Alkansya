@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Si Kiko at ang Kanyang Alkansya</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;600;800&family=Nunito:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #FFF8E7;
+    --sun: #FFB830;
+    --green: #4CAF50;
+    --green-dark: #2E7D32;
+    --blue: #29B6F6;
+    --brown: #8D6E63;
+    --pink: #F48FB1;
+    --purple: #9C6FE4;
+    --red: #EF5350;
+    --coin: #FFD700;
+    --text: #3E2723;
+    --page-bg: #FFFDE7;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--page-bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 0;
+  }
+
+  .book-cover {
+    background: linear-gradient(160deg, #FFF3CD 0%, #FFE082 60%, #FFD54F 100%);
+    text-align: center;
+    padding: 48px 24px 40px;
+    position: relative;
+    overflow: hidden;
+    border-bottom: 4px solid var(--sun);
+  }
+
+  .book-cover::before {
+    content: '';
+    position: absolute;
+    top: -40px; right: -40px;
+    width: 200px; height: 200px;
+    background: rgba(255,255,255,0.25);
+    border-radius: 50%;
+  }
+
+  .cover-title {
+    font-family: 'Baloo 2', cursive;
+    font-size: clamp(26px, 6vw, 44px);
+    font-weight: 800;
+    color: #5D4037;
+    line-height: 1.2;
+    text-shadow: 2px 3px 0 rgba(0,0,0,0.08);
+    position: relative;
+    z-index: 1;
+  }
+
+  .cover-subtitle {
+    font-size: 14px;
+    color: #795548;
+    margin-top: 6px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+  }
+
+  .piggy-icon {
+    font-size: 80px;
+    margin: 16px 0 8px;
+    display: block;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+
+  .story-container {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 0 60px;
+  }
+
+  .page {
+    padding: 32px 28px 24px;
+    border-bottom: 2px dashed #FFE082;
+    position: relative;
+    animation: fadeIn 0.5s ease forwards;
+    opacity: 0;
+  }
+
+  .page:nth-child(1) { animation-delay: 0.1s; }
+  .page:nth-child(2) { animation-delay: 0.2s; }
+  .page:nth-child(3) { animation-delay: 0.3s; }
+  .page:nth-child(4) { animation-delay: 0.4s; }
+  .page:nth-child(5) { animation-delay: 0.5s; }
+  .page:nth-child(6) { animation-delay: 0.6s; }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .scene {
+    border-radius: 20px;
+    padding: 28px 20px;
+    margin-bottom: 18px;
+    text-align: center;
+    font-size: clamp(52px, 12vw, 80px);
+    line-height: 1;
+    min-height: 110px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scene-1 { background: linear-gradient(135deg, #E3F2FD, #BBDEFB); }
+  .scene-2 { background: linear-gradient(135deg, #FFF9C4, #FFF176); }
+  .scene-3 { background: linear-gradient(135deg, #FCE4EC, #F8BBD0); }
+  .scene-4 { background: linear-gradient(135deg, #E8F5E9, #C8E6C9); }
+  .scene-5 { background: linear-gradient(135deg, #FFF3E0, #FFE0B2); }
+  .scene-6 { background: linear-gradient(135deg, #EDE7F6, #D1C4E9); }
+
+  .page-number {
+    position: absolute;
+    top: 12px;
+    right: 20px;
+    font-size: 11px;
+    color: #BCAAA4;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .story-text {
+    font-size: clamp(15px, 3.5vw, 18px);
+    line-height: 1.85;
+    color: #4E342E;
+    font-weight: 600;
+  }
+
+  .story-text .highlight {
+    background: #FFF176;
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-weight: 700;
+    color: #5D4037;
+  }
+
+  .dialogue {
+    background: white;
+    border-left: 4px solid var(--sun);
+    border-radius: 0 12px 12px 0;
+    padding: 10px 16px;
+    margin: 14px 0;
+    font-style: italic;
+    color: #5D4037;
+    font-size: clamp(14px, 3vw, 17px);
+    font-weight: 600;
+    box-shadow: 2px 2px 8px rgba(0,0,0,0.05);
+  }
+
+  .dialogue .speaker {
+    font-style: normal;
+    font-weight: 800;
+    color: #E65100;
+    display: block;
+    font-size: 12px;
+    margin-bottom: 3px;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
+
+  .lesson-box {
+    background: linear-gradient(135deg, #E8F5E9, #C8E6C9);
+    border: 3px solid #66BB6A;
+    border-radius: 18px;
+    padding: 20px 22px;
+    margin: 32px 28px 0;
+  }
+
+  .lesson-box h3 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 18px;
+    font-weight: 800;
+    color: var(--green-dark);
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .lesson-box ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  .lesson-box ul li {
+    font-size: 14px;
+    color: #2E7D32;
+    font-weight: 700;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(102,187,106,0.3);
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.5;
+  }
+
+  .lesson-box ul li:last-child { border-bottom: none; }
+
+  .lesson-box ul li::before {
+    content: '✅';
+    font-size: 14px;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .quiz-box {
+    background: linear-gradient(135deg, #EDE7F6, #D1C4E9);
+    border: 3px solid #9C6FE4;
+    border-radius: 18px;
+    padding: 20px 22px;
+    margin: 16px 28px 0;
+  }
+
+  .quiz-box h3 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 18px;
+    font-weight: 800;
+    color: #512DA8;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .quiz-question {
+    font-size: 14px;
+    font-weight: 700;
+    color: #4527A0;
+    margin-bottom: 10px;
+    line-height: 1.5;
+  }
+
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .quiz-btn {
+    background: white;
+    border: 2px solid #9C6FE4;
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    font-weight: 700;
+    color: #4527A0;
+    cursor: pointer;
+    text-align: left;
+    font-family: 'Nunito', sans-serif;
+    transition: all 0.2s ease;
+  }
+
+  .quiz-btn:hover { background: #EDE7F6; transform: translateX(4px); }
+  .quiz-btn.correct { background: #C8E6C9; border-color: #4CAF50; color: #1B5E20; }
+  .quiz-btn.wrong { background: #FFCDD2; border-color: #EF5350; color: #B71C1C; }
+
+  .quiz-result {
+    display: none;
+    margin-top: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    padding: 8px 12px;
+    border-radius: 8px;
+    line-height: 1.5;
+  }
+
+  .coin-row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+    font-size: 28px;
+    margin: 8px 0;
+  }
+
+  .coin-anim {
+    display: inline-block;
+    animation: spin 1.5s ease-in-out infinite;
+  }
+
+  @keyframes spin {
+    0%, 100% { transform: rotateY(0deg); }
+    50% { transform: rotateY(180deg); }
+  }
+
+  .the-end {
+    text-align: center;
+    padding: 36px 28px 48px;
+  }
+
+  .the-end h2 {
+    font-family: 'Baloo 2', cursive;
+    font-size: 32px;
+    font-weight: 800;
+    color: #5D4037;
+    margin-bottom: 6px;
+  }
+
+  .the-end p {
+    font-size: 13px;
+    color: #A1887F;
+    font-weight: 600;
+  }
+
+  .star-row {
+    font-size: 24px;
+    margin: 10px 0;
+    letter-spacing: 4px;
+  }
+</style>
+</head>
+<body>
+
+<div class="book-cover">
+  <span class="piggy-icon">🐷</span>
+  <div class="cover-title">Si Kiko at ang<br>Kanyang Alkansya</div>
+  <div class="cover-subtitle">Isang Kwento Tungkol sa Pagtitipid · Para sa mga Bata</div>
+</div>
+
+<div class="story-container">
+
+  <!-- Page 1 -->
+  <div class="page">
+    <span class="page-number">PAHINA 1</span>
+    <div class="scene scene-1">🏠☀️🌳</div>
+    <p class="story-text">
+      Si <span class="highlight">Kiko</span> ay isang masayang batang may pitong taong gulang. Nakatira siya sa isang maliit na bahay kasama ang kanyang <span class="highlight">Nanay</span> at <span class="highlight">Tatay</span>.
+    </p>
+    <div class="dialogue">
+      <span class="speaker">Kiko</span>
+      "Nanay, gusto ko po ng bagong laruan! Yung kotse-kotse na may ilaw!"
+    </div>
+    <p class="story-text">
+      Ngumiti ang kanyang Nanay at sinabi...
+    </p>
+    <div class="dialogue">
+      <span class="speaker">Nanay</span>
+      "Kiko, hindi tayo basta-basta makabibili ng laruan. Pero mayroon akong lihim na paraan!"
+    </div>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="page">
+    <span class="page-number">PAHINA 2</span>
+    <div class="scene scene-2">🐷💰✨</div>
+    <p class="story-text">
+      Inilabas ng Nanay ang isang <span class="highlight">pink na alkansya</span> na hugis baboy. Ito ay may maliit na butas sa itaas para sa mga pera.
+    </p>
+    <div class="dialogue">
+      <span class="speaker">Nanay</span>
+      "Ito ang iyong alkansya, Kiko! Tuwing mayroon kang barya, ilagay mo dito. Pag naipon na, mabibili mo ang iyong gusto!"
+    </div>
+    <p class="story-text">
+      Kumislap ang mga mata ni Kiko sa saya. Kinuha niya ang alkansya at inangat ito.
+    </p>
+    <div class="dialogue">
+      <span class="speaker">Kiko</span>
+      "Wow! Parang kulang-kulang pa siya, Nanay. Kailan ko siya mapupuno?"
+    </div>
+    <div class="dialogue">
+      <span class="speaker">Nanay</span>
+      "Depende sa iyo, anak. Kailangan ng <span class="highlight">pasensya</span> at <span class="highlight">disiplina!</span>"
+    </div>
+  </div>
+
+  <!-- Page 3 -->
+  <div class="page">
+    <span class="page-number">PAHINA 3</span>
+    <div class="scene scene-3">🏪🍭😔</div>
+    <p class="story-text">
+      Isang araw, binigyan si Kiko ng <span class="highlight">dalawang pisong barya</span> ng kanyang Lolo. Habang naglalakad siya, nakita niya ang tindahan ng kendi.
+    </p>
+    <div class="story-text" style="margin-top:12px;">
+      Nag-iisip si Kiko...
+    </div>
+    <div class="dialogue">
+      <span class="speaker">Kiko (sa isip niya)</span>
+      "Gusto ko ng kendi... pero kung ilagay ko ito sa alkansya, mas malapit na ako sa aking kotse-kotse!"
+    </div>
+    <p class="story-text">
+      Matagal siyang nag-isip. Pagkatapos, <span class="highlight">inilagay niya ang barya sa alkansya</span> kaysa bilhin ang kendi.
+    </p>
+    <div class="coin-row">
+      <span class="coin-anim">🪙</span>
+      <span style="font-size:22px;font-weight:800;color:#E65100;">→</span>
+      <span class="coin-anim">🐷</span>
+    </div>
+  </div>
+
+  <!-- Page 4 -->
+  <div class="page">
+    <span class="page-number">PAHINA 4</span>
+    <div class="scene scene-4">📅🪙🪙🪙</div>
+    <p class="story-text">
+      Araw-araw, kahit maliit lang ang barya, <span class="highlight">itinitipid ni Kiko</span>. Hindi siya bumibili ng hindi naman kailangan.
+    </p>
+    <p class="story-text" style="margin-top:10px;">
+      Pagkatapos ng <span class="highlight">isang buwan</span>, puno na ang kanyang alkansya! Binuhos niya ang lahat ng pera sa mesa at binilang kasama ang kanyang Tatay.
+    </p>
+    <div class="dialogue">
+      <span class="speaker">Tatay</span>
+      "Isa, dalawa, tatlo... sampung piso! Labinlima! Dalawampu! Ay ang galing mo, Kiko — <span class="highlight">tatlumpung piso</span> ang naipon mo!"
+    </div>
+    <div class="dialogue">
+      <span class="speaker">Kiko</span>
+      "Tatay! Sapat na ba iyon para sa kotse-kotse?"
+    </div>
+    <div class="dialogue">
+      <span class="speaker">Tatay</span>
+      "Halos sapat na! Dagdagan pa natin ng konti, at mabibili mo na!"
+    </div>
+  </div>
+
+  <!-- Page 5 -->
+  <div class="page">
+    <span class="page-number">PAHINA 5</span>
+    <div class="scene scene-5">🚗✨😄</div>
+    <p class="story-text">
+      Pumunta sila sa tindahan. Dala ni Kiko ang kanyang pinaghandang pera. Pinili niya ang <span class="highlight">kotse-kotseng may ilaw</span> na matagal na niyang pinapangarap.
+    </p>
+    <div class="dialogue">
+      <span class="speaker">Kiko</span>
+      "Ito na! Ito na po ang gusto ko!"
+    </div>
+    <p class="story-text">
+      Ibinigay ni Kiko ang kanyang pera sa tindero. Nang hawakan niya ang kanyang bagong laruan, <span class="highlight">sobrang saya niya</span> — mas masaya pa kaysa kung basta binili lang ito ng kanyang magulang.
+    </p>
+    <div class="dialogue">
+      <span class="speaker">Kiko</span>
+      "Nanay, mas masarap pala ang pakiramdam ng binili ko mismo sa aking ipon!"
+    </div>
+    <div class="dialogue">
+      <span class="speaker">Nanay</span>
+      "Iyon ang tamang pag-iisip, anak. Iyan ang halaga ng <span class="highlight">pagtitipid!</span> 🌟"
+    </div>
+  </div>
+
+  <!-- Page 6 / End -->
+  <div class="page" style="border-bottom:none;">
+    <span class="page-number">PAHINA 6</span>
+    <div class="scene scene-6">🌟🐷🌟</div>
+    <p class="story-text">
+      Mula noon, naging ugali na ni Kiko ang <span class="highlight">magtipid</span> sa bawat baryang matanggap niya. Nalaman niya na ang maliit-maliit na ipon ay nagiging malaki kung may <span class="highlight">pasensya</span> at <span class="highlight">tiyaga</span>.
+    </p>
+    <p class="story-text" style="margin-top:12px;">
+      At sa bawat tumilaok ng manok sa umaga, ngumingiti si Kiko sa kanyang alkansya — dahil alam niyang may pangarap siyang <span class="highlight">maaabot</span>.
+    </p>
+  </div>
+
+  <!-- Lesson Box -->
+  <div class="lesson-box">
+    <h3>📚 Aralin ng Kwento</h3>
+    <ul>
+      <li>Ang pagtitipid ay nangangahulugang hindi gastusin ang lahat ng pera agad-agad.</li>
+      <li>Kahit maliit ang ipon, nagiging malaki ito kung tuloy-tuloy.</li>
+      <li>Ang pasensya at disiplina ay mahalaga para maabot ang ating mga pangarap.</li>
+      <li>Mas masaya ang isang bagay na pinaghandaan natin kaysa sa basta-bastang natanggap.</li>
+    </ul>
+  </div>
+
+  <!-- Quiz -->
+  <div class="quiz-box">
+    <h3>🧠 Tanong para sa mga Bata!</h3>
+    <p class="quiz-question">Bakit mas masaya si Kiko sa kanyang kotse-kotse kaysa kung binili lang ito ng kanyang magulang para sa kanya?</p>
+    <div class="quiz-options">
+      <button class="quiz-btn" onclick="answer(this, false)">A. Kasi mas maganda ang kotse-kotse na binili niya.</button>
+      <button class="quiz-btn" onclick="answer(this, true)">B. Kasi pinaghirapan niya ito at pinag-ipunan ng matagal.</button>
+      <button class="quiz-btn" onclick="answer(this, false)">C. Kasi mas mura ang kotse-kotse sa tindahan.</button>
+    </div>
+    <div class="quiz-result" id="quiz-result"></div>
+  </div>
+
+  <div class="the-end">
+    <div class="star-row">⭐⭐⭐</div>
+    <h2>Katapusan 🎉</h2>
+    <p>Sumulat din ikaw ng iyong sariling kwento tungkol sa pagtitipid!</p>
+  </div>
+
+</div>
+
+<script>
+function answer(btn, correct) {
+  const btns = document.querySelectorAll('.quiz-btn');
+  const result = document.getElementById('quiz-result');
+  btns.forEach(b => b.disabled = true);
+  if (correct) {
+    btn.classList.add('correct');
+    result.style.display = 'block';
+    result.style.background = '#C8E6C9';
+    result.style.color = '#1B5E20';
+    result.innerHTML = '🎉 <strong>Tama!</strong> Pinaghirapan ni Kiko ang kanyang pera sa pamamagitan ng pagtitipid sa loob ng isang buwan. Kaya mas espesyal ang kanyang nararamdaman!';
+  } else {
+    btn.classList.add('wrong');
+    result.style.display = 'block';
+    result.style.background = '#FFCDD2';
+    result.style.color = '#B71C1C';
+    result.innerHTML = '💡 <strong>Subukan muli!</strong> Basahin muli ang pahina 5 para malaman ang tamang sagot.';
+    setTimeout(() => {
+      btn.classList.remove('wrong');
+      btn.disabled = false;
+      result.style.display = 'none';
+    }, 2200);
+  }
+}
+</script>
+</body>
+</html>
